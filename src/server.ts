@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import cors from 'cors'
 import productRoutes from "./routes/product"
 import orderRoutes from "./routes/order"
+import { webhookHandler } from "./webhook"
 
 dotenv.config()
 
@@ -14,6 +15,8 @@ const PORT = process.env.PORT || 3000
 app.use(cors());
 
 connectToDatabase()
+
+app.post("/webhook", express.raw({ type: 'application/json'}), webhookHandler)
 
 app.use(express.json())
 app.use("/orders", orderRoutes)
