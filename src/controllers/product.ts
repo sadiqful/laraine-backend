@@ -43,3 +43,19 @@ export const getProducts =async (request: Request, response: Response) => {
         throw error
     }
 }
+
+export const getProductById =async (request: Request, response: Response) => {
+    try {
+
+        const { id } = request.params 
+        const product = await Product.findById(id)
+        response.send(product)
+        
+    } catch (error) {
+        console.log("Error in getting product", error)
+        response.send({
+            message: "Something went wrong while getting product"
+        })
+        throw error
+    }
+}
