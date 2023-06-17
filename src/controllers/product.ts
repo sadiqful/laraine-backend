@@ -28,3 +28,18 @@ export const createProduct = async (request: Request, response: Response) => {
         throw error 
     }
 }
+
+export const getProducts =async (request: Request, response: Response) => {
+    try {
+
+        const products = await Product.find({})
+        response.send(products)
+        
+    } catch (error) {
+        console.log("Error in getting products", error)
+        response.send({
+            message: "Something went wrong while getting products"
+        })
+        throw error
+    }
+}
